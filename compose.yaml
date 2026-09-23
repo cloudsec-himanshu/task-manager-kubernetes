@@ -1,0 +1,10 @@
+services:
+  task-manager:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: task-manager-container
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/tasks.db:/app/backend/tasks.db
