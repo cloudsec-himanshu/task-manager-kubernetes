@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,3 +15,15 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t task-manager:latest -f backend/Dockerfile .
+
+      - name: Run Docker container
+        run: docker run -d --name task-manager-test -p 8000:8000 task-manager:latest
+
+      - name: Test application
+        run: |
+          sleep 5
+          curl --fail http://localhost:8000/
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop task-manager-test
