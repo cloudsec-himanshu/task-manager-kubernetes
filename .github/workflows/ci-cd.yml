@@ -27,7 +27,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-            - name: Push Docker image to GHCR
+      - name: Push Docker image to GHCR
         run: docker push ghcr.io/cloudsec-himanshu/task-manager-kubernetes:latest
       - name: Run Docker container
         run: docker run -d --name task-manager-test -p 8000:8000 task-manager:latest
